@@ -2,7 +2,6 @@
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
-#  You may obtain a copy of the License at
 #
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
@@ -23,7 +22,6 @@ from aitemplate.testing.benchmark_pt import benchmark_torch_function
 def benchmark(model, batch_size):
     with torch.inference_mode():
         input_shape = (batch_size, 3, 224, 224)
-        input_data = torch.randn(input_shape).cuda().half()
         # warm up
         benchmark_torch_function(100, model, input_data)
         # benchmark
@@ -44,7 +42,6 @@ def main(batch_size):
         for batch_size in [1, 2, 4, 8, 16, 32, 64, 128, 256]:
             benchmark(model, batch_size)
     else:
-        benchmark(model, batch_size)
 
 
 if __name__ == "__main__":
